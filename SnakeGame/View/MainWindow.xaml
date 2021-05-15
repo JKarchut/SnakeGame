@@ -1,0 +1,98 @@
+﻿<Window x:Class="SnakeGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SnakeGame"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800" ResizeMode="NoResize" Name="Main">
+    <Window.InputBindings>
+        <KeyBinding Key="Up" Command="{Binding UpKey}"></KeyBinding>
+        <KeyBinding Key="Right" Command="{Binding RightKey}"></KeyBinding>
+        <KeyBinding Key="Down" Command="{Binding DownKey}"></KeyBinding>
+        <KeyBinding Key="Left" Command="{Binding LeftKey}"></KeyBinding>
+    </Window.InputBindings>
+    <Window.Resources>
+        <local:RandomImage x:Key="RandomImage"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        <Canvas Background="Wheat" Width="500" Height="500">
+            <ItemsControl ItemsSource="{Binding Game.Snake.Body}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas></Canvas>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Width="{Binding Size}" Height="{Binding Size}" Fill="Blue">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                    <TranslateTransform X="{Binding X}" 
+                                                        Y="{Binding Y}">
+                                    </TranslateTransform>
+                                </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ItemsControl ItemsSource="{Binding Game.Fruits.fruits}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas></Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Width="5" Height="5" Fill="Black">
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform X="{Binding X}" 
+                                                        Y="{Binding Y}">
+                                    </TranslateTransform>
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Canvas>
+        <StackPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Points: "/>
+                <TextBlock Text="{Binding Game.Points}"/>
+            </StackPanel>
+            <TextBox Focusable="False" BorderBrush="White">
+                <TextBox.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Game.IsSnakeAlive}" Value="True">
+                                <Setter Property="TextBox.Text" Value="Game Running"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Game.IsSnakeAlive}" Value="False">
+                                <Setter Property="TextBox.Text" Value="Game Over"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Rectangle Width="200" Height="200">
+                <Rectangle.Fill>
+                    <ImageBrush>
+                        <ImageBrush.ImageSource>
+                            <MultiBinding Converter="{StaticResource RandomImage}">
+                                <Binding Path="Game.Images.Url"/>
+                                <Binding Path="Game.Points"/>
+                            </MultiBinding>
+                        </ImageBrush.ImageSource>
+                    </ImageBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </StackPanel>
+    </Grid>
+</Window>
