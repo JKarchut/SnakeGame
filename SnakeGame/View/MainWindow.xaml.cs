@@ -20,16 +20,10 @@ namespace SnakeGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        SnakeGame.GameViewModel game;
+        GameViewModel game;
         public MainWindow()
         {
             game = new GameViewModel(500, 500);
-            game.Game.Images.Url = new List<string>();
-            game.Game.Images.Url.Add("https://cdn.pixabay.com/photo/2015/02/28/15/25/snake-653639_960_720.jpg");
-            game.Game.Images.Url.Add("https://cdn.pixabay.com/photo/2014/11/23/21/22/snake-543243_960_720.jpg");
-            game.Game.Images.Url.Add("https://cdn.pixabay.com/photo/2014/08/15/21/40/snake-419043_960_720.jpg");
-            game.Game.Images.Url.Add("https://cdn.pixabay.com/photo/2014/08/15/21/40/snake-419043_960_720.jpg");
-            game.Game.Images.Url.Add("https://cdn.pixabay.com/photo/2016/08/31/18/19/snake-1634293_960_720.jpg");
             InitializeComponent();
             DataContext = game;
         }

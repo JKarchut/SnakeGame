@@ -10,7 +10,6 @@ namespace SnakeGame.Game
     {
         private int Width { get; set; }
         private int Height { get; set; }
-        public UrlImages Images { get; set; }
         public int Points { get => points; set { points = value; OnPropertyChanged("Points"); } }
         public bool IsSnakeAlive { get => alive; set { alive = value; OnPropertyChanged("IsSnakeAlive"); } }
         private DispatcherTimer timer;
@@ -26,7 +25,6 @@ namespace SnakeGame.Game
         public Fruits Fruits { get; set; }
         public SnakeGame(int wid,int heig)
         {
-            Images = new UrlImages();
             Width = wid;
             Height = heig;
             tick = 0;

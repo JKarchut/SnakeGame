@@ -12,9 +12,6 @@
         <KeyBinding Key="Down" Command="{Binding DownKey}"></KeyBinding>
         <KeyBinding Key="Left" Command="{Binding LeftKey}"></KeyBinding>
     </Window.InputBindings>
-    <Window.Resources>
-        <local:RandomImage x:Key="RandomImage"/>
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500"/>
@@ -81,18 +78,7 @@
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            <Rectangle Width="200" Height="200">
-                <Rectangle.Fill>
-                    <ImageBrush>
-                        <ImageBrush.ImageSource>
-                            <MultiBinding Converter="{StaticResource RandomImage}">
-                                <Binding Path="Game.Images.Url"/>
-                                <Binding Path="Game.Points"/>
-                            </MultiBinding>
-                        </ImageBrush.ImageSource>
-                    </ImageBrush>
-                </Rectangle.Fill>
-            </Rectangle>
+            
         </StackPanel>
     </Grid>
 </Window>
